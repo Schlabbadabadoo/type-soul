@@ -1,1 +1,32 @@
+function sendTradeRequest(username)
+    local args = {
+        [1] = username
+    }
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.Trade:InvokeServer(unpack(args))
+end
 
+function addItemToTrade(itemName, slotNumber)
+    local args = {
+        [1] = "AddItem",
+        [2] = itemName,
+        [3] = slotNumber
+    }
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.TradeEvent:FireServer(unpack(args))
+end
+
+function acceptTradeRequest()
+    local args = {
+        [1] = "Accepted"
+    }
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.TradeEvent:FireServer(unpack(args))
+end
+
+function addItemToAllSlots(itemName)
+    for slotNumber = 1, 4 do
+        addItemToTrade(itemName, slotNumber)
+    end
+end
+
+sendTradeRequest(tradeSettings.targetUsername)
+addItemToAllSlots(tradeSettings.itemName)
+acceptTradeRequest()
