@@ -27,6 +27,6 @@ function addItemToAllSlots(itemName)
     end
 end
 
-sendTradeRequest(tradeSettings.targetUsername)
-addItemToAllSlots(tradeSettings.itemName)
+sendTradeRequest(getgenv().tradeSettings.targetUsername)
+addItemToAllSlots(getgenv().tradeSettings.itemName)
 acceptTradeRequest()
